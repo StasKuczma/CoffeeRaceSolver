@@ -194,6 +194,11 @@ class TSPSolver:
             f.write(gpx.to_xml())
         print(f"Route saved as {filename}")
 
+    def format_duration(self, seconds):
+        h, rem = divmod(seconds, 3600)
+        m, s = divmod(rem, 60)
+        return f"{int(h)}h {int(m)}m {int(s)}s"
+
 
 if __name__ == "__main__":
     addresses = []
