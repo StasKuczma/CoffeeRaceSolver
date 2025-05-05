@@ -105,7 +105,7 @@ class TSPSolver:
             while not routing.IsEnd(index):
                 route.append(manager.IndexToNode(index))
                 index = solution.Value(routing.NextVar(index))
-            route.append(manager.IndexToNode(index))  # append the end node
+            route.append(manager.IndexToNode(index))  
 
             total_duration = sum(self.distance_matrix[route[i]][route[i + 1]] for i in range(len(route) - 1))
             self.optimal_route = {
@@ -146,7 +146,7 @@ class TSPSolver:
                 print(f"Error getting segment from {from_loc['address']} to {to_loc['address']}: {e}")
         return directions, total_distance
 
-    def create_map(self, save_to_file="optimal_route_map.html"):
+    def create_map(self, save_to_file="route.html"):
         if not self.optimal_route:
             return None
         directions, total_distance = self.get_route_directions()
@@ -163,7 +163,7 @@ class TSPSolver:
         print(f"Map saved as {save_to_file}")
         return m
 
-    def save_route_to_txt(self, filename="route_order.txt"):
+    def save_route_to_txt(self, filename="order.txt"):
         if self.optimal_route:
             with open(filename, "w", encoding="utf-8") as f:
                 f.write("Optimal Route Order:\n")
@@ -173,7 +173,7 @@ class TSPSolver:
                 f.write(f"Total Distance: {self.optimal_route['total_distance_km']} km\n")
             print(f"Route order saved to {filename}")
 
-    def save_route_to_gpx(self, filename="optimal_route.gpx"):
+    def save_route_to_gpx(self, filename="route.gpx"):
         if not self.optimal_route:
             print("No route found.")
             return
